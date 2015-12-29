@@ -29,7 +29,7 @@ case 'new':
 function printUsage() {
   console.log("Usage:");
   console.log();
-  console.log("  neon new <name> [--rust|-r nightly|stable|default]");
+  console.log("  neon new [@scope/]<name> [--rust|-r nightly|stable|default]");
   console.log("    create a new Neon project");
   console.log();
   console.log("  neon help");
