@@ -25,7 +25,7 @@ const LIB_SUFFIX = {
   'win32':   ".dll"
 };
 
-function cargo(toolchain, configuration, nodeModuleVersion) {
+function cargo(toolchain, configuration) {
   let macos = process.platform === 'darwin';
 
   let [command, prefix] = toolchain === 'default'
@@ -52,7 +52,7 @@ async function main(name, configuration) {
   await copy(dylib, index);
 }
 
-export default async function neon_build(pwd, toolchain, configuration, nodeModuleVersion) {
+export default async function neon_build(pwd, toolchain, configuration) {
   // 1. Read the Cargo metadata.
   let metadata = TOML.parse(await readFile(path.resolve('native', 'Cargo.toml'), 'utf8'));
 
@@ -63,7 +63,7 @@ export default async function neon_build(pwd, toolchain, configuration, nodeModu
   console.log(style.info("running cargo"));
 
   // 2. Build the binary.
-  if ((await cargo(toolchain, configuration, nodeModuleVersion)) !== 0) {
+  if ((await cargo(toolchain, configuration)) !== 0) {
     throw new Error("cargo build failed");
   }
 
